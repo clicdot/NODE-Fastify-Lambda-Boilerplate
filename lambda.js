@@ -28,6 +28,7 @@ const binaryMimeTypes = [
   'text/xml'
 ];
 
+// test
 // const proxy = awsLambdaFastify(app)
 // or
 const proxy = awsLambdaFastify(App, { binaryMimeTypes: binaryMimeTypes });
