@@ -21,11 +21,11 @@ test('GET /', async (assert) => {
     }
   });
 
-  const res = JSON.parse(root.payload);
+  const { response } = JSON.parse(root.payload);
 
-  assert.equal(res.response.code, 404);
+  assert.equal(response.code, 404);
   assert.same(root.headers['content-type'], 'application/json; charset=utf-8', 'Match content-type header');
-  assert.same(res.response.messages.errors[0], 'not found', 'Retrieve response error message');
+  assert.same(response.messages.errors[0], 'not found', 'Retrieve response error message');
   assert.end();
 });
 

@@ -1,15 +1,15 @@
 'use strict';
 
-const responseSchema = require('../schemas/response');
-const CHK = require('../modules/ping');
-const pkg = require('../../package.json');
+const responseSchema = require('../../schemas/response');
+// const CHK = require('../../modules/ping');
+const pkg = require('../../../package.json');
 
 module.exports = async (fastify, opts) => {
   fastify.addHook('onRequest', async (request, reply) => {
 
   })
     .addHook('preHandler', async (request, reply) => {
-      const chk = new CHK();
+      // const chk = new CHK();
       const data = {
         BUILD: pkg.version
       };

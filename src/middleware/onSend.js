@@ -17,7 +17,7 @@ module.exports = fp(async (fastify, opts) => {
         resp.$init(request, reply);
         // console.log('PAYLOAD', payl);
         // Handle standard fastify errors in new response format
-        if (payl.hasOwnProperty('errors') || payl.hasOwnProperty('warnings') || payl.hasOwnProperty('infos')) {
+        if (Object.prototype.hasOwnProperty.call(payl, 'errors') || Object.prototype.hasOwnProperty.call(payl, 'warnings') || Object.prototype.hasOwnProperty.call(payl, 'infos')) {
           // console.log('ERRORS', Object.keys(payl));
           // resp.$msg()
           const keys = Object.keys(payl);
@@ -34,7 +34,7 @@ module.exports = fp(async (fastify, opts) => {
         // Process payload normally
         } else {
           resp.$data(payl);
-          if (payl.hasOwnProperty('statusCode') && payl.statusCode >= 400) {
+          if (Object.prototype.hasOwnProperty.call(payl, 'statusCode') && payl.statusCode >= 400) {
             resp.$inject('code', payl.statusCode);
             resp.$msg('errors', [payl.error, payl.message]);
             resp.$data([]);

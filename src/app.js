@@ -13,10 +13,24 @@ module.exports = (fastify, opts, next) => {
       secret: process.env.JWT_SECRET || 'youshouldspecifyalongsecret'
     })
     .use(compression())
+    .register(require('./helpers/swagger-ui'), {
+      // swagger specification which should be exposed
+      specification: {
+        type: 'file',
+        path: 'src/swagger/swagger20-with-extensions.json'
+      },
+      // path under which swagger-ui will be available
+      path: 'swagger-ui'
+    })
 
     // Auto Load Middleware
     .register(AutoLoad, {
       dir: path.join(__dirname, 'middleware')
+    })
+
+    // Serve static swagger ui
+    .get('/swagger-ui/', (req, reply) => {
+      reply.send();
     })
 
     // Auto Loads Schema Definitions and Models
@@ -29,7 +43,7 @@ module.exports = (fastify, opts, next) => {
 
     // Auto Load Controllers
     .register(AutoLoad, {
-      dir: path.join(__dirname, 'controllers')
+      dir: path.join(__dirname, 'api/controllers')
     })
 
     /**
@@ -38,9 +52,8 @@ module.exports = (fastify, opts, next) => {
     .register(
       require('./api/v1/routes'),
       { options: process.env }
-    )
-  	.get('/', (request, reply) => reply.send({ hello: 'world', key: process.env.JWT_SECRET }));
+    );
+  // .get('/', (request, reply) => reply.send({ hello: 'world', key: process.env.JWT_SECRET }));
 
   next();
-
-}
+};

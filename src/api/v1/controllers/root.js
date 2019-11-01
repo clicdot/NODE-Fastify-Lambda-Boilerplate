@@ -12,6 +12,6 @@ module.exports = async (fastify, opts) => {
     reply.statusCode = 200;
     reply
       .code(reply.statusCode)
-      .send({test: 'Hello World'});
+      .send({ test: 'Hello World' });
   });
 };

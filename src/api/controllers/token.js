@@ -1,6 +1,6 @@
 'use strict';
 
-const responseSchema = require('../schemas/response');
+const responseSchema = require('../../schemas/response');
 
 module.exports = async (fastify, opts) => {
   fastify.post('/auth/token', responseSchema('tokenData#'), async (request, reply) => {

@@ -31,7 +31,7 @@ const R = class {
     this.responseTmp.response.function.url = `${request.raw.url}`;
     this.responseTmp.response.function.ip = request.ip;
 
-    if (request.hasOwnProperty('appVersion')) {
+    if (Object.prototype.hasOwnProperty.call(request, 'appVersion')) {
       this.responseTmp.response.function.apiVersion = request.appVersion;
     }
   }

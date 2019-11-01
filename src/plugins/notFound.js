@@ -6,7 +6,7 @@ const R = require('../helpers/response');
 const schema = {
   schema: {
     response: {
-      '200': {
+      200: {
         type: 'object',
         properties: {
           response: 'responseMain#'

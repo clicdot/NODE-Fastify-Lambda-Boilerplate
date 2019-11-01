@@ -9,7 +9,7 @@ test('root test bad access token route', async (assert) => {
   const res = await app.inject({
     method: 'GET',
     url: '/api/v1',
-    headers: { Authorization: `Bearer badtoken` }
+    headers: { Authorization: 'Bearer badtoken' }
   });
 
   const { response } = JSON.parse(res.payload);
@@ -45,7 +45,7 @@ test('root test access token route', async (assert) => {
 
   const auth = await app.inject({
     method: 'POST',
-    url: '/token',
+    url: '/auth/token',
     payload: { companyId: 12345 }
   });
 

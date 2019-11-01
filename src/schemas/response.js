@@ -2,7 +2,7 @@ module.exports = (params) => {
   return {
     schema: {
       response: {
-        'xxx': {
+        xxx: {
           type: 'object',
           properties: {
             response: 'responseMain#',

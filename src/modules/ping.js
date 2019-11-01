@@ -5,7 +5,7 @@
 
 const ping = class {
   constructor () {
-
+    this.example = null;
   }
 };
 

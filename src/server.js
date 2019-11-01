@@ -19,7 +19,6 @@ const start = async () => {
       if (err) throw err;
       console.log(`server listening on ${address}`);
     });
-
   } catch (err) {
     console.error(err);
     process.exit(1);
