@@ -1,7 +1,7 @@
 'use strict';
 
 const { test } = require('tap');
-const { build } = require('./helper');
+const { build, close } = require('./helper');
 const cheerio = require('cheerio');
 const fastifySequelize = require('../src/modules/sequelize');
 const Sequelize = require('sequelize');
@@ -31,6 +31,7 @@ test('App Test', (assert) => {
     assert.equal(response.code, 404);
     assert.same(root.headers['content-type'], 'application/json; charset=utf-8', 'Match content-type header');
     assert.same(response.messages.errors[0], 'not found', 'Retrieve response error message');
+    close(app);
     // assert.end();
   });
 

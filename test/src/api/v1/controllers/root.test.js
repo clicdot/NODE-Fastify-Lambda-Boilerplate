@@ -1,7 +1,7 @@
 'use strict';
 
 const { test } = require('tap');
-const { build } = require('../../../../helper');
+const { build, close } = require('../../../../helper');
 
 test('root test', (assert) => {
   const app = build(assert);
@@ -59,6 +59,7 @@ test('root test', (assert) => {
     assert.equal(response.code, 200, 'Success');
     assert.deepEqual(response.function, { method: 'GET', url: '/api/v1', ip: '127.0.0.1', apiVersion: 'v1' }, 'Test function');
     assert.notOk(response.messages, 'Errors do not exist');
+    close(app);
     // assert.end();
   });
 });

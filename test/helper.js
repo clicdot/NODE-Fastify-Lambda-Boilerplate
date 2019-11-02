@@ -8,7 +8,7 @@ const fp = require('fastify-plugin');
 const App = require('../src/app');
 require('../src/environment/env');
 
-const { beforeEach, afterEach, tearDown } = require('tap');
+const { beforeEach, afterEach, tearDown, error } = require('tap');
 
 let app;
 
@@ -42,19 +42,39 @@ function build (t) {
   // different from the production setup
   app.register(fp(App), config());
 
+  t.beforeEach((done) => {
+    done();
+  });
+
   t.afterEach((done) => {
-    // app.close();
     done();
   });
 
   // tear down our app after we are done
   t.tearDown(() => {
-    // console.log('DB', app.db);
-    // app.db.close();
     app.close.bind(app);
   });
 
   return app;
 }
 
-module.exports = { build };
+function close(app) {
+  // Quit Redis
+  if (app.redis) {
+    app.redis.quit();
+  }
+  // Close Sequelize
+  if (app.db) {
+    app.db.close();
+  }
+  // Close Mongo
+  if (app.mongo) {
+    app.mongo.db.close();
+  }
+  // Close ElasticSearch
+  if (app.elastic) {
+    app.elastic.close();
+  }
+}
+
+module.exports = { build, close };

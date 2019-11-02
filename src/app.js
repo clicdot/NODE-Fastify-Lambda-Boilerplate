@@ -2,14 +2,13 @@
 
 const path = require('path');
 const AutoLoad = require('fastify-autoload');
-const compression = require('compression');
 
 module.exports = (fastify, opts, next) => {
   fastify
     .register(require('fastify-helmet'))
     .register(require('fastify-cors'))
-    // .register(require('fastify-compress'))
-    .use(compression())
+    .register(require('fastify-compress'), { encodings: ['deflate', 'gzip'] })
+    // .use(compression())
     .register(require('fastify-jwt'), {
       secret: process.env.JWT_SECRET
     })

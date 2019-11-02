@@ -1,7 +1,7 @@
 'use strict';
 
 const { test } = require('tap');
-const { build } = require('../../../helper');
+const { build, close } = require('../../../helper');
 
 test('generate token', (assert) => {
   const app = build(assert);
@@ -34,5 +34,6 @@ test('generate token', (assert) => {
 
     t.deepEqual(response.function, { method: 'POST', url: '/auth/token', ip: '127.0.0.1' }, 'Test function');
     t.ok(data, 'Token value');
+    close(app);
   });
 });
