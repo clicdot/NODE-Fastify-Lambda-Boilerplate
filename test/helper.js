@@ -6,22 +6,25 @@
 const Fastify = require('fastify');
 const fp = require('fastify-plugin');
 const App = require('../src/app');
+require('../src/environment/env');
 
-const { beforeEach, tearDown } = require('tap');
+const { beforeEach, afterEach, tearDown } = require('tap');
 
-// let client;
+let app;
 
-beforeEach(async function () {
-  // if (!client) {
+beforeEach(async (done) => {
+  app = Fastify({ logger: { level: 'silent' } });
 
-  // }
+  done();
 });
 
-tearDown(async function () {
-  // if (client) {
-  //   // await client.close();
-  //   // client = null;
-  // }
+afterEach(async (done) => {
+  app.close();
+  done();
+});
+
+tearDown(async () => {
+  app.close.bind(app);
 });
 
 // Fill in this config with all the configurations
@@ -34,15 +37,22 @@ function config () {
 
 // automatically build and tear down our instance
 function build (t) {
-  const app = Fastify({ logger: { level: 'silent' } });
-
   // fastify-plugin ensures that all decorators
   // are exposed for testing purposes, this is
   // different from the production setup
   app.register(fp(App), config());
 
+  t.afterEach((done) => {
+    // app.close();
+    done();
+  });
+
   // tear down our app after we are done
-  t.tearDown(app.close.bind(app));
+  t.tearDown(() => {
+    // console.log('DB', app.db);
+    // app.db.close();
+    app.close.bind(app);
+  });
 
   return app;
 }

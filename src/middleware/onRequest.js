@@ -16,22 +16,17 @@ module.exports = fp(async (fastify, opts) => {
         }
       });
 
-      try {
-        if (runAuthCheck) {
-          if (request.headers.authorization) {
-            const auth = await request.jwtVerify();
+      if (runAuthCheck) {
+        if (request.headers.authorization) {
+          await request.jwtVerify();
 
-            request.companyId = auth.companyID;
-          } else {
-            throw Object.assign({}, {
-              errors: ['Authorization Error: No Access token provided.'],
-              code: 401
-            });
-          }
+          // request.companyId = auth.companyID;
+        } else {
+          throw Object.assign({}, {
+            errors: ['Authorization Error: No Access token provided.'],
+            code: 401
+          });
         }
-      } catch (error) {
-        console.error('AUTH ERROR:', error);
-        throw error;
       }
     });
 });

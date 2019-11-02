@@ -9,10 +9,10 @@ module.exports = (fastify, opts, next) => {
     .register(require('fastify-helmet'))
     .register(require('fastify-cors'))
     // .register(require('fastify-compress'))
-    .register(require('fastify-jwt'), {
-      secret: process.env.JWT_SECRET || 'youshouldspecifyalongsecret'
-    })
     .use(compression())
+    .register(require('fastify-jwt'), {
+      secret: process.env.JWT_SECRET
+    })
     .register(require('./helpers/swagger-ui'), {
       // swagger specification which should be exposed
       specification: {
