@@ -173,7 +173,7 @@ test('App Test', (assert) => {
     // assert.end();
   });
 
-  assert.test('Response Handler', (assert) => {
+  assert.test('Response Handler', async (assert) => {
     const res = new R();
 
     const ts = new Date();
@@ -225,6 +225,6 @@ test('App Test', (assert) => {
     // assert.same(response.response.timestamp, ts, 'Timestamp');
     assert.ok(response.response.function.apiVersion, 'API Version');
     assert.equal(response.response.id, uuid);
-    assert.end();
+    // assert.end();
   });
 });

@@ -5,7 +5,9 @@ const fastify = require('fastify');
 const fp = require('fastify-plugin');
 
 const app = require('./src/app');
-const App = fastify().register(fp(app));
+const App = fastify()
+  .register(fp(app))
+  .register(require('./src/adapter/dbconnect'));
 require('./src/environment/env');
 
 const binaryMimeTypes = [

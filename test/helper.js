@@ -8,23 +8,22 @@ const fp = require('fastify-plugin');
 const App = require('../src/app');
 require('../src/environment/env');
 
-const { beforeEach, afterEach, tearDown, error } = require('tap');
+const { beforeEach, afterEach, tearDown } = require('tap');
 
 let app;
 
 beforeEach(async (done) => {
   app = Fastify({ logger: { level: 'silent' } });
-
+  app.register(require('../src/adapter/dbconnect'));
   done();
 });
 
 afterEach(async (done) => {
-  app.close();
   done();
 });
 
 tearDown(async () => {
-  app.close.bind(app);
+
 });
 
 // Fill in this config with all the configurations
@@ -52,13 +51,14 @@ function build (t) {
 
   // tear down our app after we are done
   t.tearDown(() => {
+    app.close();
     app.close.bind(app);
   });
 
   return app;
 }
 
-function close(app) {
+function close (app) {
   // Quit Redis
   if (app.redis) {
     app.redis.quit();
@@ -74,6 +74,10 @@ function close(app) {
   // Close ElasticSearch
   if (app.elastic) {
     app.elastic.close();
+  }
+  // Close MySQL
+  if (app.mysql) {
+    app.mysql.pool.end();
   }
 }
 

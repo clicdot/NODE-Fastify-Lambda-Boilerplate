@@ -13,20 +13,20 @@ module.exports = fp(async (fastify, opts) => {
   // .register(require('fastify-elasticsearch'), { host: process.env.ELAST_HOST, port: process.env.ELAST_PORT })
   // `fastify-redis` makes this connection and store the database instance into `fastify.redis`
   // See https://github.com/fastify/fastify-redis
-    .register(require('fastify-redis'), { host: process.env.REDIS_HOST })
-    // .register(require('fastify-mysql'), {
-    //   promise: true,
-    //   connectionString: `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}`,
-    //   connectionLimit: 1
-    // })
-    .register(require('../modules/sequelize'), {
-      instance: 'db', // the name of fastify plugin instance.
-      // autoConnect: true,
-      dialect: process.env.DB_CONNECTION,
-      host: process.env.DB_HOST,
-      database: process.env.DB_DATABASE,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      connectionURL: `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}`
+    // .register(require('fastify-redis'), { host: process.env.REDIS_HOST })
+    .register(require('fastify-mysql'), {
+      promise: true,
+      connectionString: `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}`,
+      connectionLimit: 5
     });
+  // .register(require('../modules/sequelize'), {
+  //   instance: 'db', // the name of fastify plugin instance.
+  //   // autoConnect: true,
+  //   dialect: process.env.DB_CONNECTION,
+  //   host: process.env.DB_HOST,
+  //   database: process.env.DB_DATABASE,
+  //   username: process.env.DB_USERNAME,
+  //   password: process.env.DB_PASSWORD,
+  //   connectionURL: `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}`
+  // });
 });

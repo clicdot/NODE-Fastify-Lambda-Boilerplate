@@ -13,7 +13,8 @@ const start = async () => {
       // file: './logs/error.log',
       pluginTimeout: 10000
     })
-      .register(fp(app));
+      .register(fp(app))
+      .register(require('./adapter/dbconnect'));
 
     await fastify.listen(process.env.PORT, '0.0.0.0', (err, address) => {
       if (err) throw err;
