@@ -2,12 +2,21 @@
 
 const Fastify = require('fastify');
 const fp = require('fastify-plugin');
-require('./environment/env');
-
-const app = require('./app');
+const fs = require('fs-extra');
+const appRoot = require('app-root-path');
 
 const start = async () => {
   try {
+    if (!fs.existsSync(appRoot + '/src/.env')) {
+      // file doesn't exists
+      throw Object.assign(
+        new Error('No .env found in \'src\' folder'),
+        { code: 402 }
+      );
+    }
+    require('./environment/env');
+
+    const app = require('./app');
     const fastify = Fastify({
       // logger,
       // file: './logs/error.log',
