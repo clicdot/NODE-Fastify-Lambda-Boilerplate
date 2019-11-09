@@ -14,14 +14,14 @@ module.exports = async (fastify, opts) => {
     //   // Results will be an empty array and metadata will contain the number of affected rows.
     //   console.log(results);
     // });
-    fastify.mysql.query(
-      'SELECT * FROM AssetMgmt.Status',
-      function onResult (err, result) {
-        // reply.send(err || result)
-        console.log(err, result);
-        // fastify.mysql.pool.end();
-      }
-    );
+    // fastify.mysql.query(
+    //   'SELECT * FROM AssetMgmt.Status',
+    //   function onResult (err, result) {
+    //     // reply.send(err || result)
+    //     console.log(err, result);
+    //     // fastify.mysql.pool.end();
+    //   }
+    // );
 
     reply.statusCode = 200;
     reply
