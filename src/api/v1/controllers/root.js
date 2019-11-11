@@ -22,7 +22,7 @@ module.exports = async (fastify, opts) => {
     //     // fastify.mysql.pool.end();
     //   }
     // );
-    const { processor } = fastify;
+    // const { processor } = fastify;
     // console.log(processor);
 
     reply.statusCode = 200;

@@ -19,14 +19,14 @@ module.exports = fp(async (fastify, opts) => {
   //   connectionString: `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}`,
   //   connectionLimit: 5
   // });
-  .register(require('../modules/sequelize'), {
-    instance: 'db', // the name of fastify plugin instance.
-    // autoConnect: true,
-    dialect: process.env.DB_CONNECTION,
-    host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    connectionURL: `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}`
-  });
+    .register(require('../modules/sequelize'), {
+      instance: 'db', // the name of fastify plugin instance.
+      // autoConnect: true,
+      dialect: process.env.DB_CONNECTION,
+      host: process.env.DB_HOST,
+      database: process.env.DB_DATABASE,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      connectionURL: `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_DATABASE}`
+    });
 });

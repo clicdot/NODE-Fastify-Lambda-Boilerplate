@@ -4,6 +4,12 @@ const Fastify = require('fastify');
 const fp = require('fastify-plugin');
 const fs = require('fs-extra');
 const appRoot = require('app-root-path');
+const pino = require('pino');
+const logpath = './logs/error.log';
+
+require('./createLog')(logpath);
+
+const logger = pino({ level: 'info' }, logpath);
 
 const start = async () => {
   try {
@@ -18,8 +24,8 @@ const start = async () => {
 
     const app = require('./app');
     const fastify = Fastify({
-      // logger,
-      // file: './logs/error.log',
+      logger,
+      file: logpath,
       pluginTimeout: 10000
     })
       .register(require('./adapter/dbconnect'))
