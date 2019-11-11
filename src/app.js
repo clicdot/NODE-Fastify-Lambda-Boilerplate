@@ -27,6 +27,11 @@ module.exports = (fastify, opts, next) => {
       dir: path.join(__dirname, 'middleware')
     })
 
+    // Auto Load Plugins
+    .register(AutoLoad, {
+      dir: path.join(__dirname, 'plugins')
+    })
+
     // Serve static swagger ui
     .get('/swagger-ui/', (req, reply) => {
       reply.send();
@@ -34,11 +39,6 @@ module.exports = (fastify, opts, next) => {
 
     // Auto Loads Schema Definitions and Models
     .register(require('./helpers/schemaAutoLoader'))
-
-    // Auto Load Plugins
-    .register(AutoLoad, {
-      dir: path.join(__dirname, 'plugins')
-    })
 
     // Auto Load Controllers
     .register(AutoLoad, {

@@ -6,5 +6,8 @@ const DB = require('../modules/dbProcessor');
 module.exports = fp(async (fastify, opts) => {
   const db = new DB(fastify.db);
 
-  fastify.decorate('processor', { db: db, test: 1 });
+  fastify.decorate('processor', {
+    db: db,
+    conn: db.connection()
+  });
 });

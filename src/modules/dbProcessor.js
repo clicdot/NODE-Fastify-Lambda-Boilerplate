@@ -12,6 +12,7 @@ class Processor {
   }
 
   query (sql, data) {
+    console.log(sql, data);
     return this.db.query(sql, data);
   }
 }
