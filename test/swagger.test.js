@@ -30,9 +30,9 @@ test('Swagger', (assert) => {
       url: '/swagger-ui/specification.json'
     });
 
-    const { response, data } = JSON.parse(res.payload);
+    const data = JSON.parse(res.payload);
 
-    assert.ok(response, 'response Exist');
+    assert.ok(data.swagger, 'response Exist');
     assert.ok(data, 'data Exist');
     assert.ok(data.swagger, 'swagger Exist');
     assert.equal(data.swagger, '2.0', 'swagger version');
