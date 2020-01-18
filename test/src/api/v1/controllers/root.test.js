@@ -15,13 +15,13 @@ test('root test', (assert) => {
       headers: { Authorization: 'Bearer badtoken' }
     });
 
-    const response = JSON.parse(res.payload);
-
-    assert.equal(response.statusCode, 401, 'Failed Auth');
+    const { response } = JSON.parse(res.payload);
+    console.log('RESULT', response);
+    assert.equal(response.code, 401, 'Failed Auth');
     // assert.deepEqual(response.function, { method: 'GET', url: '/api/v1', ip: '127.0.0.1' }, 'Test function');
-    assert.ok(response.error, 'Errors Exist');
-    assert.same(response.message, 'Authorization token is invalid: jwt malformed', 'Unauthorized Error');
-    // assert.same(response.messages.errors[1], 'Authorization token is invalid: jwt malformed', 'Unauthorized Error');
+    assert.ok(response.messages.errors, 'Errors Exist');
+    assert.same(response.messages.errors[0], 'Unauthorized', 'Unauthorized Error');
+    assert.same(response.messages.errors[1], 'Authorization token is invalid: jwt malformed', 'Unauthorized Error');
   });
 
   assert.test('no access token route', async (assert) => {
