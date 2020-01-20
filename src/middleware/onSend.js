@@ -33,11 +33,11 @@ module.exports = fp(async (fastify, opts) => {
           // // Process payload normally
           // } else {
           resp.$data(payl);
-          if (Object.prototype.hasOwnProperty.call(payl, 'statusCode') && payl.statusCode >= 400) {
-            resp.$inject('code', payl.statusCode);
-            resp.$msg('errors', [payl.error, payl.message]);
-            resp.$data([]);
-          }
+          // if (Object.prototype.hasOwnProperty.call(payl, 'statusCode') && payl.statusCode >= 400) {
+          resp.$inject('code', payl.statusCode);
+          resp.$msg('errors', [payl.error, payl.message]);
+          resp.$data([]);
+          // }
           // }
           nPayload = JSON.stringify(resp.$send());
         }

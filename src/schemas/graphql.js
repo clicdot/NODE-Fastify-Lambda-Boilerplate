@@ -18,10 +18,10 @@ const {
 // const serviceController = require('../controllers/serviceController')
 
 // Define Object Types
-const carType = new GraphQLObjectType({
-  name: 'Car',
-  fields: () => ({})
-});
+// const carType = new GraphQLObjectType({
+//   name: 'Car',
+//   fields: () => ({})
+// });
 
 // const ownerType = new GraphQLObjectType({
 //   name: 'Owner',
@@ -48,27 +48,27 @@ const RootQuery = new GraphQLObjectType({
 const Mutations = new GraphQLObjectType({
   name: 'Mutations',
   fields: {
-    addCar: {
-      type: carType,
-      args: {},
-      async resolve (args) {
-        return '';
-      }
-    },
-    editCar: {
-      type: carType,
-      args: {},
-      async resolve (args) {
-        return '';
-      }
-    },
-    deleteCar: {
-      type: carType,
-      args: {},
-      async resolve (args) {
-        return '';
-      }
-    }
+    // addCar: {
+    //   type: carType,
+    //   args: {},
+    //   async resolve (args) {
+    //     return '';
+    //   }
+    // },
+    // editCar: {
+    //   type: carType,
+    //   args: {},
+    //   async resolve (args) {
+    //     return '';
+    //   }
+    // },
+    // deleteCar: {
+    //   type: carType,
+    //   args: {},
+    //   async resolve (args) {
+    //     return '';
+    //   }
+    // }
   }
 });
 
