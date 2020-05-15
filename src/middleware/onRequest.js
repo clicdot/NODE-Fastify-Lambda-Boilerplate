@@ -6,7 +6,7 @@ module.exports = fp(async (fastify, opts) => {
   fastify
     .addHook('onRequest', async (request, reply) => {
       let runAuthCheck = true;
-      const excludedRoutes = ['/swagger-ui/'];
+      const excludedRoutes = ['/swagger-ui/', '/api/v1'];
       const apiRoutes = ['/api/'];
 
       excludedRoutes.forEach((route) => {
