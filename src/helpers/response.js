@@ -1,8 +1,11 @@
 'use strict';
 
+const uuid = require('uuid');
+const v4 = uuid.v4;
+
 const R = class {
   constructor () {
-    this.uuidv4 = require('uuid/v4');
+    this.uuidv4 = v4();
 
     this.responseTmp = {};
     this.responseEnv = {
