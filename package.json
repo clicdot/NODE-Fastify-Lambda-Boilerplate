@@ -23,7 +23,7 @@
     "app-root-path": "^3.0.0",
     "aws-lambda-fastify": "^1.4.3",
     "dotenv": "^8.2.0",
-    "fastify": "^2.14.1",
+    "fastify": "^2.15.1",
     "fastify-autoload-recursive": "^1.0.0-rc.0",
     "fastify-compress": "^2.0.1",
     "fastify-cors": "^3.0.3",
